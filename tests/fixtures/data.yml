@@ -1,0 +1,3 @@
+services:
+  - TestingDataStandarizer : [http://test/, Null]
+  - Testing2DataStandarizer : [http://test2/, CustomDataFetcher]

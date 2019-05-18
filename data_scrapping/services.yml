@@ -1,0 +1,3 @@
+services:
+  - BerghainDataStandarizer : [http://berghain.de/events/, Null]
+  - CoBerlinDataStandarizer: [https://www.co-berlin.org/en/calender, CoBerlinDataFetcher]
