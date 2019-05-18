@@ -1,14 +1,12 @@
-import pytest
 import os
-from urllib3_mock import Responses
 from pathlib import Path
-from data_scrapping.data_scrapping import (
-    Fetcher,
-    CoBerlinDataFetcher,
-    Parser,
-    Scrapper,
-    FileReader,
-)
+
+import pytest
+from urllib3_mock import Responses
+
+from data_scrapping.data_scrapping import (CoBerlinDataFetcher, Fetcher,
+                                           FileReader, Parser, Scrapper,
+                                           prepare_data_from_each_service)
 
 responses = Responses("requests.packages.urllib3")
 
@@ -42,6 +40,10 @@ class MockFetcher:
     def download_data(self):
         return self.link
 
+    @property
+    def prepare_all_pages(self):
+        return [self.link]
+
 
 class MockParser:
     def __init__(self, fetched_data):
@@ -50,6 +52,17 @@ class MockParser:
     @property
     def parse_raw_data(self):
         return self.fetched_data
+
+
+class MockScrapper(Scrapper):
+    def __init__(self, service_link, fetcher=Fetcher, parser=Parser):
+        self.service_link = service_link
+        self.fetcher = fetcher
+        self.parser = parser
+
+    @property
+    def parsed_data(self):
+        return self.service_link
 
 
 class TestFetcher(object):
@@ -105,3 +118,15 @@ class TestFileReader(object):
         data = FileReader(file_path).data
         assert len(data["services"]) == 2
         assert data["services"] == expected_result
+
+
+def test_prepare_data_from_each_service_usage():
+    globals = {"MockFetcher": MockFetcher}
+    file_path = "tests/fixtures/services.yml"
+    result = prepare_data_from_each_service(file_path, MockScrapper, globals)
+    expected = {
+        "TestingDataStandarizer": ["http://test/"],
+        "Testing2DataStandarizer": ["http://test2/"],
+    }
+
+    assert result == expected

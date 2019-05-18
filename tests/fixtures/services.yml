@@ -1,0 +1,3 @@
+services:
+  - TestingDataStandarizer : [http://test/, MockFetcher]
+  - Testing2DataStandarizer : [http://test2/, MockFetcher]

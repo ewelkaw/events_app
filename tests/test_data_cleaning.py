@@ -4,11 +4,9 @@ from pathlib import Path
 import pytest
 from bs4 import BeautifulSoup
 
-from data_scrapping.data_cleaning import (
-    BerghainDataStandarizer,
-    CoBerlinDataStandarizer,
-    standarize_data,
-)
+from data_scrapping.data_cleaning import (BerghainDataStandarizer,
+                                          CoBerlinDataStandarizer,
+                                          standarize_data)
 
 
 class TestBerghainDataStandarizer(object):
