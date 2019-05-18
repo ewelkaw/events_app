@@ -1,10 +1,11 @@
-import urllib3
-from bs4 import BeautifulSoup
 import argparse
-import yaml
 from pathlib import Path
 
-from data_cleaning import standarize_data
+import urllib3
+import yaml
+from bs4 import BeautifulSoup
+
+from .data_cleaning import standarize_data
 
 
 class FileReader:
@@ -31,7 +32,7 @@ class Fetcher:
 
 class CoBerlinDataFetcher(Fetcher):
     @property
-    def prepare_all_pages(self):
+    def prepare_all_pages(self) -> list:
         services_links = []
         response = self.download_data
         response = BeautifulSoup(response, features="html.parser")
@@ -70,7 +71,9 @@ class Scrapper:
         return self.parser(fetched_data).parse_raw_data
 
 
-def prepare_data_from_each_service(file_path: str) -> dict:
+def prepare_data_from_each_service(
+    file_path: str, scrapper=Scrapper, globals=None
+) -> dict:
     data = FileReader(file_path).data
 
     data_from_services = {}
@@ -82,9 +85,9 @@ def prepare_data_from_each_service(file_path: str) -> dict:
         service_links = [service[key][0]]
 
         if fetcher:
-            service_links = eval(fetcher)(service_links[0]).prepare_all_pages
+            service_links = eval(fetcher, globals)(service_links[0]).prepare_all_pages
         data_from_services[key] = [
-            Scrapper(service_link).parsed_data for service_link in service_links
+            scrapper(service_link).parsed_data for service_link in service_links
         ]
     return data_from_services
 
