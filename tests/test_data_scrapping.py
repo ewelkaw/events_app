@@ -4,9 +4,9 @@ from pathlib import Path
 import pytest
 from urllib3_mock import Responses
 
-from data_scrapping.data_scrapping import (CoBerlinDataFetcher, Fetcher,
-                                           FileReader, Parser, Scrapper,
-                                           prepare_data_from_each_service)
+from data_scraping.data_scraping import (CoBerlinDataFetcher, Fetcher,
+                                         FileReader, Parser, Scrapper,
+                                         prepare_data_from_each_service)
 
 responses = Responses("requests.packages.urllib3")
 
