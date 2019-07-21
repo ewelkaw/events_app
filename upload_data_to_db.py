@@ -1,7 +1,7 @@
 import datetime
 from pathlib import Path
 
-from app import db
+from app import db, create_app
 from app.model import Event, WebSource
 from data_scraping.data_cleaning import standarize_data
 from data_scraping.data_scraping import prepare_data_from_each_service
@@ -10,6 +10,12 @@ services_file = Path(__file__).absolute().parent.joinpath("data_scraping/service
 
 
 def add_data_to_db():
+    app = create_app("development")
+    app_context = app.app_context()
+    app_context.push()
+    db.drop_all()
+    db.create_all()
+
     data = get_data()
     keys = list(data.keys())
     services_objects_map = upload_services(prepare_keys(keys))
