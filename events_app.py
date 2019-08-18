@@ -1,10 +1,12 @@
 # DEFINES THE FLASK APLICATION SETTINGS AND INCLUDES SOME TASKS THAT HELP MANAGE THE APPLICATION
-import os
-from app import create_app, db
-from app.model import Event, WebSource
+from flask.helpers import get_env
 from flask_migrate import Migrate
 
-app = create_app(os.getenv("FLASK_CONFIG") or "default")
+from app import create_app, db
+from app.model import Event, WebSource
+
+app = create_app(get_env())
+
 migrate = Migrate(app, db)
 
 
@@ -15,6 +17,7 @@ def make_shell_context():
 
 ### IN SHELL ###
 # $ pip install -r requirements.txt
+# $ export FLASK_ENV = development
 # $ export FLASK_APP = events_app.py
 # $ export FLASK_DEBUG = 1
 # $ flask run

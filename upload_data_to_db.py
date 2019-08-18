@@ -1,7 +1,9 @@
 import datetime
 from pathlib import Path
 
-from app import db, create_app
+from flask.helpers import get_env
+
+from app import create_app, db
 from app.model import Event, WebSource
 from data_scraping.data_cleaning import standarize_data
 from data_scraping.data_scraping import prepare_data_from_each_service
@@ -10,7 +12,7 @@ services_file = Path(__file__).absolute().parent.joinpath("data_scraping/service
 
 
 def add_data_to_db():
-    app = create_app("development")
+    app = create_app(get_env())
     app_context = app.app_context()
     app_context.push()
     db.drop_all()

@@ -10,7 +10,7 @@ class Config:
     MAIL_PORT = int(os.environ.get("MAIL_PORT", "587"))
     MAIL_USE_TLS = os.environ.get("MAIL_USE_TLS", "TRUE").lower() in ["true", "on", "1"]
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
-    MAIL_PASSWORD = os.environ.get("MSIL_PASSWORD")
+    MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
     APP_MAIL_SUBJECT_PREFIX = ["EVENTS_APP"]
     APP_MAIL_SENDER = "EventsApp Admin <event_app@example.com>"
     APP_ADMIN = os.environ.get("APP_ADMIN")

@@ -1,0 +1,22 @@
+# docker build .
+
+version: '3'
+services:
+  web:
+    build: .
+    image: events_app
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./db:/app/db
+    command: flask run
+  crawler:
+    build: .
+    image: events_app
+    volumes:
+      - ./db:/app/db
+    command: python3 crawl.py
+#
+#    volumes:
+#      - ./db:/db
+
