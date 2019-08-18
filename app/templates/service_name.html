@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %} Events for service: {{service_name}} {% endblock %}
+{% block head %}
+    {{ super() }}
+    <style>
+    </style>
+{% endblock %}
+{% block body %}
+<table>
+    <tr>
+        <th>Event name</th>
+        <th>Event Start</th>
+        <th>Event End</th>
+    </tr>
+{% for event in events %}
+  <tr>
+    <td> {{ event["event_name"] }}</td><td>{{ event["event_start"] }}</td><td>{{ event["event_end"] }}</td>
+  </tr>
+{% endfor %}
+</table>
+{% endblock %}

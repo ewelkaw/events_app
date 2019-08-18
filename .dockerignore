@@ -1,0 +1,5 @@
+./app/static/
+docker-compose.yml
+README.md
+venv/
+db/
