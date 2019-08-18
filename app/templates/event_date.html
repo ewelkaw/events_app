@@ -6,7 +6,8 @@
     </style>
 {% endblock %}
 {% block body %}
-<table>
+<div class="container">
+<table class="table table-striped table-condensed table-bordered">
     <tr>
         <th>Event name</th>
         <th>Event Start</th>
@@ -15,8 +16,12 @@
     </tr>
 {% for event in events %}
   <tr>
-    <td> {{ event["event_name"] }}</td><td>{{ event["event_start"] }}</td><td>{{ event["event_end"] }}</td><td>{{ event["source"] }}</td>
+        <td>{{ event["event_name"] }}</td>
+        <td>{{ event["event_start"] }}</td>
+        <td>{{ event["event_end"] }}</td>
+        <td>{{ link_to_source(event["source"]) | safe }}</td>
   </tr>
 {% endfor %}
 </table>
+</div>
 {% endblock %}
