@@ -17,9 +17,9 @@ def make_shell_context():
 
 ### IN SHELL ###
 # $ pip install -r requirements.txt
-# $ export FLASK_ENV = development
-# $ export FLASK_APP = events_app.py
-# $ export FLASK_DEBUG = 1
+# $ export FLASK_ENV=development
+# $ export FLASK_APP=events_app.py
+# $ export FLASK_DEBUG=1
 # $ flask run
 
 ### DB ###

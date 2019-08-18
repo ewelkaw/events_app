@@ -2,16 +2,16 @@ from datetime import date, datetime
 
 from flask import render_template
 from sqlalchemy import func
-
 from app import db
 
 from ..model import Event, WebSource
 from . import main
+from . import templates_helpers
 
 
 @main.route("/", methods=["GET"])
 def index():
-    events = Event.query.all()
+    events = Event.query.order_by(Event.event_start).all()
     return render_template("index.html", events=events)
 
 
@@ -22,6 +22,7 @@ def services(service_name):
         db.session.query(Event, WebSource)
         .filter(Event.source_id == WebSource.id)
         .filter(func.lower(WebSource.source_name) == service_name.lower())
+        .order_by(Event.event_start)
         .with_entities(Event)
         .all()
     )
@@ -37,5 +38,9 @@ def dates(event_date):
     formatted_date = date(
         formatted_date.year, formatted_date.month, formatted_date.day
     ).isoformat()
-    events = Event.query.filter_by(event_start=formatted_date).all()
+    events = (
+        Event.query.filter_by(event_start=formatted_date)
+        .order_by(Event.event_start)
+        .all()
+    )
     return render_template("event_date.html", events=events, event_date=event_date)
