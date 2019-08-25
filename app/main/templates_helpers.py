@@ -1,4 +1,4 @@
-from app.model import WebSource
+from app.models import WebSource
 
 from . import main
 

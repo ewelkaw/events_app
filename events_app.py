@@ -3,7 +3,7 @@ from flask.helpers import get_env
 from flask_migrate import Migrate
 
 from app import create_app, db
-from app.model import Event, WebSource
+from app.models import Event, WebSource
 
 app = create_app(get_env())
 

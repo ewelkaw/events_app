@@ -1,6 +1,6 @@
 import unittest
 from app import create_app, db
-from app.model import WebSource, Event
+from app.models import WebSource, Event
 from upload_data_to_db import prepare_keys, upload_services, upload_events
 from flask import current_app
 
