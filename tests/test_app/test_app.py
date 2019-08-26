@@ -1,6 +1,8 @@
 import unittest
-from app import create_app, db
+
 from sqlalchemy.orm import sessionmaker
+
+from app import create_app, db
 
 
 class FlaskClientTestCase(unittest.TestCase):

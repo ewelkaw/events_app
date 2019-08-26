@@ -1,8 +1,10 @@
 import unittest
-from app import create_app, db
-from app.models import WebSource, Event
-from sqlalchemy.orm import sessionmaker
 from datetime import datetime
+
+from sqlalchemy.orm import sessionmaker
+
+from app import create_app, db
+from app.models import Event, WebSource
 
 
 class FlaskClientDifferentWebSourcesTestCase(unittest.TestCase):
@@ -45,7 +47,6 @@ class FlaskClientDifferentWebSourcesTestCase(unittest.TestCase):
 
     def test_index_events(self):
         response = self.client.get("/")
-        print("data", response.get_data(as_text=True))
         self.assertEqual(response.status_code, 200)
         self.assertTrue(
             lambda x: x in response.get_data(as_text=True),
