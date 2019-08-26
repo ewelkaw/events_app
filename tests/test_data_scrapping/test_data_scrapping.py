@@ -119,7 +119,7 @@ class TestFileReader(object):
             {"Testing2DataStandarizer": ["http://test2/", "CustomDataFetcher"]},
         ]
 
-        file_path = "tests/fixtures/data.yml"
+        file_path = "tests/test_data_scrapping/fixtures/data.yml"
         data = FileReader(file_path).data
         assert len(data["services"]) == 2
         assert data["services"] == expected_result
@@ -127,7 +127,7 @@ class TestFileReader(object):
 
 def test_prepare_data_from_each_service_usage():
     globals = {"MockFetcher": MockFetcher}
-    file_path = "tests/fixtures/services.yml"
+    file_path = "tests/test_data_scrapping/fixtures/services.yml"
     result = prepare_data_from_each_service(file_path, MockScrapper, globals)
     expected = {
         "TestingDataStandarizer": ["http://test/"],
