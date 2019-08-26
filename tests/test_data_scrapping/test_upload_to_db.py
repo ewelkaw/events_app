@@ -1,13 +1,15 @@
 import unittest
-from app import create_app, db
-from app.model import WebSource, Event
-from upload_data_to_db import prepare_keys, upload_services, upload_events
+
 from flask import current_app
+
+from app import create_app, db
+from app.models import Event, WebSource
+from upload_data_to_db import prepare_keys, upload_events, upload_services
 
 
 class DBTest(unittest.TestCase):
     def setUp(self):
-        self.app = create_app("development")
+        self.app = create_app("testing")
         self.app_context = self.app.app_context()
         self.app_context.push()
         db.create_all()

@@ -4,7 +4,7 @@ from flask import render_template
 from sqlalchemy import func
 from app import db
 
-from ..model import Event, WebSource
+from ..models import Event, WebSource
 from . import main
 from . import templates_helpers
 

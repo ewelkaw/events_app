@@ -4,7 +4,7 @@ from pathlib import Path
 from flask.helpers import get_env
 
 from app import create_app, db
-from app.model import Event, WebSource
+from app.models import Event, WebSource
 from data_scraping.data_cleaning import standarize_data
 from data_scraping.data_scraping import prepare_data_from_each_service
 
